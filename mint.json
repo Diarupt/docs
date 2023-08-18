@@ -72,6 +72,22 @@
         "api-reference/endpoint/update",
         "api-reference/endpoint/delete"
       ]
+    },
+    {
+      "group": "Session",
+      "pages": [
+        "api-reference/session/post-create-session",
+        "api-reference/session/post-terminate-session",
+        "api-reference/session/get-session",
+        "api-reference/session/get-sessions"
+      ]
+    },
+    {
+      "group": "Resources",
+      "pages": [
+        "api-reference/resources/get-faces",
+        "api-reference/resources/get-profiles"
+      ]
     }
   ],
   "footerSocials": {
