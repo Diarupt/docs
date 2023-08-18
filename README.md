@@ -32,3 +32,8 @@ You can also preview changes using PRs, which generates a preview link of the do
 
 - Mintlify dev isn't running - Run `mintlify install` it'll re-install dependencies.
 - Page loads as a 404 - Make sure you are running in a folder with `mint.json`
+
+### Adding the latest endpoints
+
+- Run `make generate` to generate docs directly from diarupt engine api docs.
+- Copy `navigation object suggestion` into the `mint.json`'s `navigation` section, ensure there are no duplicates.
