@@ -89,5 +89,5 @@
   "api": {
     "baseUrl": "https://engine.diarupt.ai"
   },
-  "openapi": "./api.yaml"
+  "openapi": "./api.json"
 }
