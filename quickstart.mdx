@@ -1,86 +1,180 @@
 ---
-title: 'Quickstart'
-description: 'Start building realistic AI interactions in minutes'
+title: "Quickstart"
+description: "Start building realistic AI interactions in minutes"
 ---
 
-## Setup your development
+## Setup
 
-Learn how to update your docs locally and and deploy them to the public.
+Let's get you started building your first AI interaction in minutes in javascript.
 
-### Edit and preview
+<Tip>  
+  If you prefer to jump right into the code instead, you can clone our [starter repo](https://github.com/Diarupt/examples)
+</Tip>
+
+### Get your API key
+
+You will need an API key to authenticate your requests to our API and to use our SDKs.
+You can find your API keys on your [dashboard](https://beta.diarupt.ai/manage/api-keys).
 
 <AccordionGroup>
-  <Accordion icon="github" title="Clone your docs locally">
-    During the onboarding process, we created a repository on your Github with
-    your docs content. You can find this repository on our
-    [dashboard](https://dashboard.mintlify.com). To clone the repository
-    locally, follow these
-    [instructions](https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository)
-    in your terminal.
-  </Accordion>
-  <Accordion icon="rectangle-terminal" title="Preview changes">
-    Previewing helps you make sure your changes look as intended. We built a
-    command line interface to render these changes locally. 1. Install the
-    [Mintlify CLI](https://www.npmjs.com/package/mintlify) to preview the
-    documentation changes locally with this command: ``` npm i -g mintlify ```
-    2. Run the following command at the root of your documentation (where
-    `mint.json` is): ``` mintlify dev ```
+  <Accordion icon="github" title="Don't have an account? Join Beta">
+    If you don't have an account yet, you can request access
+    [here](https://beta.diarupt.ai/early-access) and we'll send you an invite
+    as soon as possible.
   </Accordion>
 </AccordionGroup>
 
-### Deploy your changes
+### Install the SDK
 
-<AccordionGroup>
+Get the javascript SDK from npm or yarn.
 
-<Accordion icon="message-bot" title="Install our Github app">
-  Our Github app automatically deploys your changes to your docs site, so you
-  don't need to manage deployments yourself. You can find the link to install on
-  your [dashboard](https://dashboard.mintlify.com). Once the bot has been
-  successfully installed, there should be a check mark next to the commit hash
-  of the repo.
-</Accordion>
-<Accordion icon="rocket" title="Push your changes">
-  [Commit and push your changes to
-  Git](https://docs.github.com/en/get-started/using-git/pushing-commits-to-a-remote-repository#about-git-push)
-  for your changes to update in your docs site. If you push and don't see that
-  the Github app successfully deployed your changes, you can also manually
-  update your docs through our [dashboard](https://dashboard.mintlify.com).
-</Accordion>
+<CodeGroup>
 
-</AccordionGroup>
+```bash npm 
+npm install diarupt
+```
 
-## Update your docs
+```bash yarn
+yarn add diarupt
+```
+</CodeGroup>
 
-Add content directly in your files with MDX syntax and React components. You can use any of our components, or even build your own.
+### Add a video element
+Add a video element to your html that would be used to display the AI's video feed.
+  
+```html index.html
+...
+<video id="ai-video" autoplay playsinline></video>
+...
+```
+
+### Create an interaction session
+
+You would need to create a session. A session is used to preconfigure your interaction before connecting to the AI and 
+allows you to continue conversations across multiple interactions.
+
+```javascript session.js
+  import axios from 'axios';
+
+  options = {
+      /**
+       * full list of available profiles can be retrieve 
+       * from /faces endpoint.
+       * see https://docs.diarupt.ai/api-reference/resources/get-profiles
+       *  */
+      profile: 'default',
+      /**
+       * full list of available faces can be retrieve 
+       * from /faces endpoint.
+       * see https://docs.diarupt.ai/api-reference/resources/get-faces
+       *  */
+      face: 'obama',
+      context: 'Teach user everything you know about programmable matter',
+  }
+
+  const createSession = async () => {
+    const res = await axios.post(
+      DIARUPT_API + '/create-session',
+      options,
+      {
+          headers: {
+              'Content-Type': 'application/json',
+              // TODO: Replace with your API key
+              "x-api-key": 'dev-test'
+          }
+    })
+
+    return res.data.session_id;
+  }
+```
+<Warning>
+  In production, you should make the session request from your backend to avoid exposing your API key.
+</Warning>
+
+### Connect to the AI
+In order to connect to the AI, you would need to provide:
+- the session id 
+- the video element that would be used to display the AI's video feed.
+- your own audio stream to enable the AI to hear you and respond.
+
+```javascript index.js
+  import {connect} from 'diarupt';
+  import {createSession} from './session';
+
+  (async() => {
+    const session_id = await createSession();
+    const ai_feed = document.getElementById('ai-video');
+    // get the user's audio stream
+    const stream = await navigator.mediaDevices.getUserMedia({
+     audio: {
+          echoCancellation: true,
+          noiseSuppression: true,
+          autoGainControl: false,
+      },
+    });
+
+    // starts the interaction
+    await connect(
+      session_id,
+      {
+          stream,
+          player: ai_feed, // video element
+      }, (event, data) => {
+          // handle events
+          switch (event) {
+              case 'open':
+                  console.log('Connection opened')
+                  break;
+              case 'error':
+                  console.log('Connection error', data)
+                  break;
+              case 'close':
+                  console.log('Connection closed')
+                  break;
+              default:
+                  console.log("Unkown:" event, data)
+                  break;
+          }
+      }
+    )
+  })();
+```
+
+### One last thing, disconnecting.
+You'll need to disconnect the session when you're done with it.
+```javascript index.js
+  import {disconnect} from 'diarupt';
+  stopButton.addEventListener('click', () => {
+    disconnect();
+  });
+```
+<Warning>
+Disconnecting an interaction let's you can continue the conversation 
+by passing the same `session_id` into the SDK again. To permanently terminate your session, see [Terminate Session](https://docs.diarupt.ai/api-reference/sessions/post-terminate-session)
+</Warning>
+
+### You're ready!
+
+Now run your code, it may takes a sec to connect and you should be able to have a conversation with your AI.
+
+<Info>  
+  See the full source code [here](https://github.com/Diarupt/examples)
+</Info>
+
+## Learn More
+
+Explore the full capabilities of the Diarupt platform.
 
 <CardGroup>
 
-<Card title="Style Your Docs" icon="paintbrush" href="/settings/global">
-  Add flair to your docs with personalized branding.
-</Card>
+    <Card title="Core Concepts" icon="square-code" href="/settings/global">
+      Learn how to use the Core Concepts of our platform to build even complex AI interactions.
+    </Card>
 
-<Card
-  title="Add API Endpoints"
-  icon="square-code"
-  href="/api-playground/configuration"
->
-  Implement your OpenAPI spec and enable API user interaction.
-</Card>
-
-<Card
-  title="Integrate Analytics"
-  icon="chart-mixed"
-  href="/analytics/supported-integrations"
->
-  Draw insights from user interactions with your documentation.
-</Card>
-
-<Card
-  title="Host on a Custom Domain"
-  icon="browser"
-  href="/settings/custom-domain/subdomain"
->
-  Keep your docs on your own website's subdomain.
-</Card>
-
+    <Card
+      title="Webhooks"
+      icon="square-code"
+      href="/api-playground/configuration">
+      Configure webhooks to receive live update on interactions as they happen.
+    </Card>
 </CardGroup>
