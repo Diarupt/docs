@@ -42,8 +42,8 @@
     },
     {
       "name": "Community",
-      "icon": "slack",
-      "url": "https://diarupt.ai/community"
+      "icon": "github",
+      "url": "https://github.com/orgs/Diarupt/discussions"
     },
     {
       "name": "Blog",
