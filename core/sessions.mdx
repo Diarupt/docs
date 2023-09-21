@@ -46,13 +46,13 @@ You can add relevant contextual information for more robust interactions, this c
     const options = {
         ...
         profile: 'interviewer',
-        behaviour: 'Company Name is XYZ Consult\nJob title is Customer Support Agent\nYour Name is Marvin\nCandidate Name is John Doe',
+        context: 'Company Name is XYZ Consult\nJob title is Customer Support Agent\nYour Name is Marvin\nCandidate Name is John Doe',
     }
   ...
 ```
 
 <Info>
-    The `context` field is limited to 2500 words.
+    The `context` field can be as long as 2500 words.
 </Info>
 
 
@@ -66,8 +66,11 @@ Coming Soon
 
 ## During an Interaction
 
-During an interaction, the diarupt client sdk streams the user's audio to Diarupt's conversation engine, processes it and sends back the AI's response as a video and/or audio stream.
+During an interaction, the diarupt client sdk streams the user's audio to Diarupt's conversation engine, processes it and sends back the AI's response as a video and/or audio stream. We use [webrtc](https://developer.mozilla.org/en-US/docs/Glossary/WebRTC) under the hood to stream audio and video to and from the client.
 
+<Warning>
+  If you're using the JS SDK, you need to ensure you're using a browser that supports webrtc. See [Browser Support](https://caniuse.com/rtcpeerconnection) for more information.
+</Warning>
 ## Disconnecting vs Terminating
 
 When an interaction is over, you can either disconnect via the `disconnect` SDK function or terminate the session via the [Terminate API](/api-reference/sessions/post-terminate-session).
@@ -78,6 +81,8 @@ While terminating the session will end the interaction and the session will be m
 
 ## Pricing 
 
-Interaction are measured in seconds spent per session, this is the toatal duration spend by the user interacting with an AI. Pricing is pay as you go, you only pay for what you use cumulatively within a given period. [See pricing] (/more/pricing)
+Interactions are measured in seconds spent per session, this is the total duration spent by the user interacting with an AI. 
 
-We give trial credit you can use to try out the platform when you sign up.
+Pricing is pay as you go, you only pay for what you use cumulatively within a given period. We give trial credit so you can try out the platform when you sign up.
+
+

@@ -65,6 +65,18 @@
       "pages": ["advanced/security"]
     },
     {
+      "group": "SDKs",
+      "pages": [
+        {
+          "group" : "Python",
+          "pages": ["advanced/connect"]
+        },
+        {
+          "group" : "Javascript",
+          "pages": ["advanced/connect"]
+        }]
+    },
+    {
       "group": "API Documentation",
       "pages": ["api-reference/authentication"]
     },
