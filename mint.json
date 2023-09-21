@@ -1,6 +1,6 @@
 {
   "$schema": "https://mintlify.com/schema.json",
-  "name": "Developers",
+  "name": "Developers Docs",
   "logo": {
     "dark": "/logo/dark.svg",
     "light": "/logo/light.svg"
@@ -69,11 +69,11 @@
       "pages": [
         {
           "group" : "Python",
-          "pages": ["advanced/connect"]
+          "pages": ["sdks/python/connect"]
         },
         {
           "group" : "Javascript",
-          "pages": ["advanced/connect"]
+          "pages": ["sdks/javascript/connect", "sdks/javascript/disconnect"]
         }]
     },
     {
@@ -95,7 +95,16 @@
         "api-reference/resources/get-faces",
         "api-reference/resources/get-profiles"
       ]
+    },
+    {
+      "group": "Schemas",
+      "pages": [
+        "api-reference/schemas/session", 
+        "api-reference/schemas/profile", 
+        "api-reference/schemas/face"
+      ]
     }
+
   ],
   "footerSocials": {
     "twitter": "https://twitter.com/diarupt",

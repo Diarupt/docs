@@ -1,22 +1,23 @@
 ---
 title: "Authentication"
-description: "Example overview page before API endpoints"
+description: "Authenticating Diarupt API requests"
 ---
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas et eros iaculis tortor dapibus cursus. Curabitur quis sapien nec tortor dictum gravida.
+
+We use API secret keys to authenticate requests between your application and the Diarupt API. You can get an API key by logging into your Diarupt Dashboaard and navigating to the [API Keys](https://app.diarupt.ai/keys) page.
+
+<Info>
+    See the [Security Page](/advanced/security) for more information on keeping your keys safe.
+</Info>
+
+
+You should add the `X-API-KEY` header to all requests to the Diarupt API. The value of the header should be your API key.
 
 ```bash
-'Authorization': 'Token <team_token>'
+'X-Api-Key': '<your_api_key>'
 ```
 
-## API Tokens
+<Info>
+  Note that Diarupt AI is currently in Private Alpha. If you would like to join the Alpha, proceed to the <a href="https://diarupt.ai/early-access">request access</a>
+</Info>
 
-Nullam convallis mauris at nunc consectetur, ac imperdiet leo rutrum. Maecenas cursus purus a pellentesque blandit. Pellentesque vitae lacinia libero, non mollis metus.
-
-Nam id ullamcorper urna, at rutrum enim. [Maecenas vulputate](/introduction) vehicula libero, vitae sodales augue pretium nec. Quisque a magna tempor, semper risus vel, fermentum nunc. Pellentesque fermentum interdum ex, eu convallis massa blandit sed. Aliquam bibendum ipsum vel laoreet auctor.
-
-### Permissions
-
-Etiam lobortis ut odio ut fermentum. Nunc odio velit, sollicitudin at consectetur id, tristique eget turpis. Aliquam at risus vitae dolor sodales venenatis. In hac habitasse platea dictumst.
-
-Aenean consequat diam eget mollis fermentum. [Quisque eu malesuada](/introduction) felis, non dignissim libero.
