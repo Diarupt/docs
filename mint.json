@@ -58,7 +58,11 @@
     },
     {
       "group": "Core Concepts",
-      "pages": ["core/overview"]
+      "pages": ["core/sessions", "core/behaviours", "core/transcripts"]
+    },
+    {
+      "group": "Advanced",
+      "pages": ["advanced/security"]
     },
     {
       "group": "API Documentation",

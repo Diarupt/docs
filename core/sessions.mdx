@@ -1,0 +1,83 @@
+---
+title: "Sessions"
+description: "Sessions are core to every AI Interaction."
+---
+
+
+Sessions are like containers that hold information about a specific interaction.
+A session contains the AI's behavior profile, the AI's face model, any additional context and other metadata that might be needed for an interaction.
+
+<Info>
+  See [Create Sessions API](/api-reference/sessions/post-create-session) & [Get Sessions API](/api-reference/sessions/get-session) to learn more.
+</Info>
+
+An Interaction doesn't start immediately after you create a session, it starts when the `open` event is triggered. This is when the AI is ready to start interacting with the user.
+
+```js
+import {connect} from 'diarupt';
+...
+    await connect(
+        session_id,
+        {
+            stream,
+            player: ai_feed, // video element
+        }, (event, data) => {
+            // handle events
+            switch (event) {
+                case 'open':
+                    console.log('Interaction is Started')
+                    break;
+            }
+        }
+    );
+...
+```
+
+<Info>
+  See [Geting Started Guide](/quickstart) for more information on starting an interaction.
+</Info>
+
+## Providing contextual information to an interaction
+
+You can add relevant contextual information for more robust interactions, this can be done by adding the contextual information to the `context` field when [creating your session](/api-reference/sessions/post-create-session). Your request payload should look something like this
+
+```javascript session.js
+  ...
+    const options = {
+        ...
+        profile: 'interviewer',
+        behaviour: 'Company Name is XYZ Consult\nJob title is Customer Support Agent\nYour Name is Marvin\nCandidate Name is John Doe',
+    }
+  ...
+```
+
+<Info>
+    The `context` field is limited to 2500 words.
+</Info>
+
+
+## Connecting external data sources to an interaction
+You can connect external data sources to your interaction, such as knowledge bases, URLs databases, other APIs and other third party application data. This allows for more advnace workflows.
+<Tip>
+Coming Soon
+</Tip>
+
+
+
+## During an Interaction
+
+During an interaction, the diarupt client sdk streams the user's audio to Diarupt's conversation engine, processes it and sends back the AI's response as a video and/or audio stream.
+
+## Disconnecting vs Terminating
+
+When an interaction is over, you can either disconnect via the `disconnect` SDK function or terminate the session via the [Terminate API](/api-reference/sessions/post-terminate-session).
+
+Disconnecting will stop the AI from responding to the user, but the session will still be `ACTIVE` but in a `PAUSED`. This means that you can reconnect to the session using the same Session ID and continue the interaction. This is useful if you want to pause the interaction and resume it later.
+
+While terminating the session will end the interaction and the session will be marked as `TERMINATED`. This means that you can no longer reconnect to the interaction.
+
+## Pricing 
+
+Interaction are measured in seconds spent per session, this is the toatal duration spend by the user interacting with an AI. Pricing is pay as you go, you only pay for what you use cumulatively within a given period. [See pricing] (/more/pricing)
+
+We give trial credit you can use to try out the platform when you sign up.

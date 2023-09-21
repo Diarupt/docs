@@ -1,0 +1,65 @@
+---
+title: "Transcripts"
+description: "Transcripts provide interactions logs"
+---
+
+Transcripts are a way to provide a detailed log of the interaction between the AI and the user. This is useful for debugging, post processing and for auditing purposes.
+
+To access the intractions transcript history you can fetch a interaction session. 
+
+<Info>
+See the [Get Session API](/api/sessions/get-session) for more information.
+</Info>
+
+An Interaction transcript history would something look like this:
+
+```json
+[
+    {
+        "timestamp": "2020-10-20T18:00:00.000Z",
+        "role": "assistant",
+        "content": "Hello, how can I help you?",
+    },
+    {
+        "timestamp": "2020-10-20T18:00:02.000Z",
+        "role": "user",
+        "content": "I need help with my order",
+    }
+]
+```
+
+### Accessing Transcript During Interaction
+
+You can also access the transcript during the interaction from the client by using the listening for the `transcript` event.
+This can be useful for displaying the transcript to the user as it is being generated or for other real-time processing.
+
+```javascript
+import {connect} from 'diarupt';
+...
+    await connect(
+        session_id,
+        {
+            stream,
+            player: ai_feed, // video element
+        }, (event, data) => {
+            // handle events
+            switch (event) {
+                case 'transcript':
+                    console.log(data);
+                    break;
+            }
+        }
+    );
+...
+```
+
+That should log the transcript to the console as it is being generated, which would look something like this:
+
+```json
+{
+    "timestamp": "2020-10-20T18:00:00.000Z",
+    "role": "assistant",
+    "content": "Hello, how can I help you?",
+}
+```
+
