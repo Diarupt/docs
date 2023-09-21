@@ -1,8 +1,77 @@
 ---
-title: Disconnect 
-description: "Disconects an active webrtc connection to Diarupt Engine."
+title: Connect 
+description: "Connect a new webrtc connection to Diarupt Engine."
 ---
 
-<Warning>
-    This is a work in progress.
-</Warning>
+The connect function is used to setup a new webrtc connection to Diarupt Engine. It is required to initiate an  AI interaction on the client.
+
+### Parameters
+
+<ParamField body="session_id" type="string" required>
+  The session_id is a unique identifier for the current session. It is used to identify the interactions session on the server. It can be retrieved when you [create a new session](/api-reference/session/post-create-session ).
+</ParamField>
+
+<ParamField body="options" type="object" required>
+    Connection options
+    <Expandable title="properties">
+        <ResponseField name="player" type="HTMLVideoElement | HTMLAudioElement">
+        The player element to use for the connection, It can be either a video or audio element. use audio element for audio-only interactions
+        </ResponseField>
+
+        <ResponseField name="stream" type="MediaStream">
+        The client media stream, See [MDN MediaStream](https://developer.mozilla.org/en-US/docs/Web/API/MediaStream) for more details
+        </ResponseField>
+    </Expandable>
+</ParamField>
+
+<ParamField body="next" type="function" required>
+    The next callback is called when an event occurs on the connection. It is used to handle the interaction events.
+    See [Interaction Events](/sdks/javascript/interaction-events) for more details
+</ParamField>
+
+
+### Returns
+ <ParamField body="void" type="Promise<void>">
+    The connect function returns Promise of type void
+</ParamField>
+
+<RequestExample>
+
+```js Example
+import {connect} from 'diarupt';
+import {createSession} from './session';
+
+(async() => {
+    const session_id = await createSession();
+    const ai_feed = document.getElementById('ai-video');
+    
+    // get the user's audio stream
+    const stream = await navigator.mediaDevices.getUserMedia({
+        audio: {
+            echoCancellation: true,
+            noiseSuppression: true,
+            autoGainControl: false,
+        },
+    });
+
+    const options = {
+        stream,
+        player: ai_feed,
+    }
+
+    const next = (event, data) => {
+        // handle events
+        console.log(event, data);
+    }
+
+    // starts the interaction
+    await connect(
+        session_id,
+        options,
+        next
+    )
+})();
+
+```
+
+</RequestExample>

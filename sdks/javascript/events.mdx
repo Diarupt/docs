@@ -1,0 +1,85 @@
+---
+title: Events
+description: "Interaction Events"
+---
+
+Interaction Events are events that are triggered when interaction with and AI. These event help you manage state and other workflows in your application.
+
+See [Connect](/sdks/javascript/connect) on how to handle these events
+
+## Event Types
+
+### Open
+
+<ParamField body="event" type="open" required>
+    This event is triggered when the Interaction connection is opened and ready to send and receive data
+</ParamField>
+
+<ParamField body="data" type="string" required>
+    This is a string message, e.g "data channel opened"
+</ParamField>
+
+### Close
+
+<ParamField body="event" type="close" required>
+    This event is triggered when the Interaction connection is close. This can happen for a number of reasons, including the user closing the browser tab or window, calling the [disconnect](/sdks/javascript/disconnect) function, or the connection being lost.
+</ParamField>
+
+<ParamField body="data" type="string" required>
+    This is a string message, e.g "data channel closed"
+</ParamField>
+
+### Transcript
+
+<ParamField body="event" type="error" required>
+    This event is used to sends a real-time interaction transcript to client from the server
+</ParamField>
+
+<ParamField body="data" type="object" required>
+    This return an object with the following properties
+    <Expandable title="properties">
+        <ResponseField name="timestamp" type="Timestamp">
+        Transcript timstamp
+        </ResponseField>
+        <ResponseField name="role" type="'assistant' | 'user' ">
+        The party the transcript belongs to
+        </ResponseField>
+        <ResponseField name="content" type="string">
+        The content of the transcript.
+        </ResponseField>
+    </Expandable>
+</ParamField>
+
+### Error
+
+<ParamField body="event" type="error" required>
+    This event is triggered when their is an error with the webrtc connection or any other error duting the interaction
+</ParamField>
+
+<ParamField body="data" type="Error" required>
+    This return a javascript javascript Error object
+</ParamField>
+
+
+<RequestExample>
+
+```js Example
+import {connect} from 'diarupt';
+...
+    const next = (event, data) => {
+        // handle events
+        console.log(event, data);
+    }
+
+    // starts the interaction
+    await connect(
+        session_id,
+        options,
+        next
+    )
+...
+
+```
+
+</RequestExample>
+

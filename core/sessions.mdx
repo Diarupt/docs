@@ -8,7 +8,7 @@ Sessions are like containers that hold information about a specific interaction.
 A session contains the AI's behavior profile, the AI's face model, any additional context and other metadata that might be needed for an interaction.
 
 <Info>
-  See [Create Sessions API](/api-reference/sessions/post-create-session) & [Get Sessions API](/api-reference/sessions/get-session) to learn more.
+  See [Create Sessions API](/api-reference/session/post-create-session) & [Get Sessions API](/api-reference/session/get-session) to learn more.
 </Info>
 
 An Interaction doesn't start immediately after you create a session, it starts when the `open` event is triggered. This is when the AI is ready to start interacting with the user.
@@ -39,7 +39,7 @@ import {connect} from 'diarupt';
 
 ## Providing contextual information to an interaction
 
-You can add relevant contextual information for more robust interactions, this can be done by adding the contextual information to the `context` field when [creating your session](/api-reference/sessions/post-create-session). Your request payload should look something like this
+You can add relevant contextual information for more robust interactions, this can be done by adding the contextual information to the `context` field when [creating your session](/api-reference/session/post-create-session). Your request payload should look something like this
 
 ```javascript session.js
   ...
@@ -73,7 +73,7 @@ During an interaction, the diarupt client sdk streams the user's audio to Diarup
 </Warning>
 ## Disconnecting vs Terminating
 
-When an interaction is over, you can either disconnect via the `disconnect` SDK function or terminate the session via the [Terminate API](/api-reference/sessions/post-terminate-session).
+When an interaction is over, you can either disconnect via the `disconnect` SDK function or terminate the session via the [Terminate API](/api-reference/session/post-terminate-session).
 
 Disconnecting will stop the AI from responding to the user, but the session will still be `ACTIVE` but in a `PAUSED`. This means that you can reconnect to the session using the same Session ID and continue the interaction. This is useful if you want to pause the interaction and resume it later.
 

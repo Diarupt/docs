@@ -68,13 +68,14 @@
       "group": "SDKs",
       "pages": [
         {
-          "group" : "Python",
-          "pages": ["sdks/python/connect"]
+          "group": "Javascript",
+          "pages": ["sdks/javascript/install", "sdks/javascript/connect", "sdks/javascript/disconnect", "sdks/javascript/events"]
         },
         {
-          "group" : "Javascript",
-          "pages": ["sdks/javascript/connect", "sdks/javascript/disconnect"]
-        }]
+          "group": "Python",
+          "pages": ["sdks/python/connect"]
+        }
+      ]
     },
     {
       "group": "API Documentation",
@@ -99,12 +100,11 @@
     {
       "group": "Schemas",
       "pages": [
-        "api-reference/schemas/session", 
-        "api-reference/schemas/profile", 
+        "api-reference/schemas/session",
+        "api-reference/schemas/profile",
         "api-reference/schemas/face"
       ]
     }
-
   ],
   "footerSocials": {
     "twitter": "https://twitter.com/diarupt",

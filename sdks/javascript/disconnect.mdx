@@ -3,6 +3,28 @@ title: Disconnect
 description: "Disconects an active webrtc connection to Diarupt Engine."
 ---
 
-<Warning>
-    This is a work in progress.
-</Warning>
+The disconnect function is used to disconnect an active webrtc connection to Diarupt Engine.
+you need to have an active connection to use the disconnect function, although if you don't it silently fails.
+
+### Parameters
+
+<ParamField body="void" type="void" required>
+    The disconnect function takes no parameters
+</ParamField>
+
+
+### Returns
+<ParamField body="void" type="void">
+    The disconnect function returns void
+</ParamField>
+
+<RequestExample>
+
+```js Example
+import {disconnect} from 'diarupt';
+
+disconnect();
+
+```
+
+</RequestExample>
