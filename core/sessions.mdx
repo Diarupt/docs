@@ -75,9 +75,9 @@ During an interaction, the diarupt client sdk streams the user's audio to Diarup
 
 When an interaction is over, you can either disconnect via the `disconnect` SDK function or terminate the session via the [Terminate API](/api-reference/session/post-terminate-session).
 
-Disconnecting will stop the AI from responding to the user, but the session will still be `ACTIVE` but in a `PAUSED`. This means that you can reconnect to the session using the same Session ID and continue the interaction. This is useful if you want to pause the interaction and resume it later.
+Disconnecting will stop the AI from responding to the user. Successful disconnection leaves the session ACTIVE but in a PAUSED state. This means that you can reconnect to the session using the same Session ID and continue the interaction. This is useful if you want to pause the interaction and resume it later.
 
-While terminating the session will end the interaction and the session will be marked as `TERMINATED`. This means that you can no longer reconnect to the interaction.
+Terminating a session will end the interaction and the session will be marked as `TERMINATED`. This means that you can no longer reconnect to the interaction.
 
 ## Pricing 
 
