@@ -58,7 +58,7 @@
     },
     {
       "group": "Core Concepts",
-      "pages": ["core/sessions", "core/behaviours", "core/transcripts"]
+      "pages": ["core/sessions", "core/behaviors", "core/transcripts"]
     },
     {
       "group": "Advanced",

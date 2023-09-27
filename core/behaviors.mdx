@@ -1,0 +1,37 @@
+---
+title: "Behaviors"
+description: "Behaviors are the AI's behavior profile. They define how the AI will respond to the user."
+---
+
+
+Behaviors are a core part of an Interaction as they set the ground rules for how the AI will respond and interact with the user. By Default we have a few of predefined behavior profile and we'll keep adding more as we go along.
+
+For example we have an `interviewer` profile, this profile is designed to be used for interview style interactions. It will ask the user a series of questions and then respond based on the answers. It will also keep track of the answers and use them to respond to the user.
+
+<Info>
+See the [Get available profiles](/api-reference/resources/get-profile) for a list of all the available profiles.
+</Info>
+
+## Creating a new behaviors
+
+Creating a new behavior is simple, you just need to specify the behavior parameter when creating your Session. Complex Behaviors can be built ontop any of the existing behavior profiles. Although we recommend you use the `base` behavior profile when creating a session with a custom behavior.
+
+<Info>
+See [Getting Started](/getting-started) for more information on how to create a session.
+</Info>
+
+When creating a session with custom behavior your payload should look something like this:
+
+```javascript session.js
+  ...
+    const options = {
+        ...
+        profile: 'base',
+        behavior: 'Assume the role of a detective and solve the case.\nAsk as many question as neccessary.',
+    }
+  ...
+```
+
+
+
+
