@@ -21,6 +21,16 @@
             "description": "AI Profile for session, see /profiles for available profiles",
             "example": "interviewer"
           },
+          "behavior": {
+            "type": "string",
+            "description": "AI behaviour extension of set profile for session",
+            "example": "Assume the role of a doctor. You're conducting an examination."
+          },
+          "time_limit": {
+            "type": "number",
+            "description": "Time limit for session in seconds, if 0 or not set then no time limit",
+            "example": 300
+          },
           "context": {
             "type": "string",
             "description": "Additonal context for session, builds on top of selected profile",
@@ -44,11 +54,8 @@
             "type": "array",
             "items": { "$ref": "#/components/schemas/HistoryItem" }
           },
-          "summary": {
-            "type": "array",
-            "items": { "$ref": "#/components/schemas/HistoryItem" }
-          },
           "created_at": { "type": "string" },
+          "duration": { "type": "integer" },
           "id": { "type": "string" }
         }
       },
@@ -57,14 +64,17 @@
         "properties": {
           "face": { "type": "string" },
           "profile": { "type": "string" },
-          "context": { "type": "string" }
+          "context": { "type": "string" },
+          "behavior": { "type": "string" },
+          "time_limit": { "type": "integer" }
         }
       },
       "HistoryItem": {
         "type": "object",
         "properties": {
           "role": { "type": "string" },
-          "content": { "type": "string" }
+          "content": { "type": "string" },
+          "timestamp": { "type": "string" }
         }
       },
       "AIFace": {
