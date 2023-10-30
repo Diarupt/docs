@@ -19,6 +19,28 @@ See [Connect](/sdks/javascript/connect) on how to handle these events
     This is a string message, e.g "data channel opened"
 </ParamField>
 
+### User Started Talking 
+(Hands-on mode event)
+
+<ParamField body="event" type="user-started-talking" required>
+    This event is triggered when the user starts talking
+</ParamField>
+
+<ParamField body="data" type="null" required>
+    No data is returned
+</ParamField>
+
+### User Stopped Talking
+(Hands-on mode event)
+
+<ParamField body="event" type="user-stopped-talking" required>
+    Emitted after user stop talking plus the when handsOnTimeout elapses.
+</ParamField>
+
+<ParamField body="data" type="string" required>
+    No data is returned
+</ParamField>
+
 ### Close
 
 <ParamField body="event" type="close" required>
@@ -29,7 +51,7 @@ See [Connect](/sdks/javascript/connect) on how to handle these events
     This is a string message, e.g "data channel closed"
 </ParamField>
 
-### Transcript
+{/* ### Transcript
 
 <ParamField body="event" type="error" required>
     This event is used to sends a real-time interaction transcript to client from the server
@@ -48,7 +70,7 @@ See [Connect](/sdks/javascript/connect) on how to handle these events
         The content of the transcript.
         </ResponseField>
     </Expandable>
-</ParamField>
+</ParamField> */}
 
 ### Error
 

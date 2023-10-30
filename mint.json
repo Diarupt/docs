@@ -62,14 +62,14 @@
     },
     {
       "group": "Advanced",
-      "pages": ["advanced/security"]
+      "pages": ["advanced/mode", "advanced/security"]
     },
     {
       "group": "SDKs",
       "pages": [
         {
           "group": "Javascript",
-          "pages": ["sdks/javascript/install", "sdks/javascript/connect", "sdks/javascript/disconnect", "sdks/javascript/events"]
+          "pages": ["sdks/javascript/install", "sdks/javascript/connect", "sdks/javascript/disconnect", "sdks/javascript/send-response", "sdks/javascript/events"]
         },
         {
           "group": "Python",

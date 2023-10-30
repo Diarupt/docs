@@ -1,0 +1,35 @@
+---
+title: SendUserResponse 
+description: "Send User Response to AI in Hands-on Mode"
+---
+
+SendUserResponse function helps to manually send user's response to the AI when Hands-on mode is enabled
+
+### Parameters
+
+No Parameters
+
+### Returns
+ <ParamField body="void" type="void">
+    The SendUserResponse function returns void
+</ParamField>
+
+<RequestExample>
+
+```js Example
+import { sendUserResponse } from 'diarupt'
+let userTalking = false
+sendResponseBtn = document.getElementById('send-response-btn')
+...
+sendResponseBtn.addEventListener('click', () => {
+    if (userTalking) {
+    // send user response
+    sendResponseBtn.disabled = true
+    sendUserResponse()
+    }
+})
+...
+
+```
+
+</RequestExample>

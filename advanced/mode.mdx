@@ -1,0 +1,117 @@
+---
+title: "Hands-on Mode"
+description: "Walkthrough of using Hands-on mode vs Hands-free mode."
+---
+
+We have two conversation modes **Hands-free** and **Hands-on**. 
+
+By default interactions are initiated in **Hands-free** mode, In this mode users just talk to the AI and we automatically process the response, timing and manage the conversation responsiveness in the background.
+
+While Hands-on mode, allows users to manually determine when to send their full response to the AI.
+
+<Info>
+    You can try out the Hands-on mode in the [Playground](https://app.diarupt.ai/) by changing the **Interaction Mode** control to `hands-on` in the `Advanced Controls` section.
+</Info>
+
+## Why Hands-on Mode?
+
+Hands-on Mode is useful in cases where you want the user to control when they send their response to the AI for processing. This allows the user more control over the responsiveness of the conversation.
+
+
+## Enabling Hands-on Mode
+
+In Hands-on mode, we wait for user to manually send their response before the set `hands-on timeout` after which we will automatically send the response. If you never want the response to be automatically sent, you will need to set the `time-out` to a relative high value.
+
+To enable Hands-on mode,
+
+```js
+    import { connect } from 'diarupt'
+    ...
+        await connect(
+          sid,
+          {
+            stream,
+            player: video, // output video to the video element
+            mode: 'hands-on', // enables hands on mode
+            handsOnTimeout: 5000, // automatically sends user response after 5 seconds
+          }, (event: string, data: unknown) => {
+            // handle hands-on specific events
+            switch (event) {
+              case 'user-started-talking':
+                console.log('user started talking')
+                break;
+              case 'user-stopped-talking':
+                console.log('user stopped talking')
+                break;
+              default:
+                console.log(event, data)
+                break;
+            }
+          }
+        )
+    ...
+```
+
+## Hands-on Mode Events
+
+In Hands-on mode, we emit the following events
+
+| Event | Description |
+| --- | --- |
+| `user-started-talking` | Emitted when the user starts talking |
+| `user-stopped-talking` | Emitted after user stop talking plus the when `handsOnTimeout` elapses. |
+
+
+## Sending User Response
+
+User response need to be manually sent, or will be automatically sent after `handsOnTimeout` has elapsed.
+
+To send user's response.
+
+```js
+    import { connect, sendUserResponse } from 'diarupt'
+    let userTalking = false
+    sendResponseBtn = document.getElementById('send-response-btn')
+
+    ...
+        await connect(
+          sid,
+          {
+            stream,
+            player: video, // output video to the video element
+            mode: 'hands-on', // enables hands on mode
+            handsOnTimeout: 5000, // automatically sends user response after 5 seconds
+          }, (event: string, data: unknown) => {
+            // handle hands-on specific events
+            switch (event) {
+              case 'user-started-talking':
+                userTalking = true
+                // enable send response button when user starts talking
+                sendResponseBtn.disabled = false
+                break;
+              case 'user-stopped-talking':
+                userTalking = false
+                // disable send response button when user stops talking
+                // this is to prevent sending empty response
+                sendResponseBtn.disabled = false
+                break;
+              default:
+                console.log(event, data)
+                break;
+            }
+          }
+        )
+    ...
+
+    // send user response
+    sendResponseBtn.addEventListener('click', () => {
+      if (userTalking) {
+        sendResponseBtn.disabled = true
+        sendUserResponse()
+      }
+    })
+```
+
+## Conclusion
+
+You're all set to use Hands-on mode. Now you control your user's conversational experience as you wish while still enjoying the benefit of our realtime video conversation AI.
