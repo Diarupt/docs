@@ -51,7 +51,7 @@ See [Connect](/sdks/javascript/connect) on how to handle these events
     This is a string message, e.g "data channel closed"
 </ParamField>
 
-{/* ### Transcript
+### Transcript
 
 <ParamField body="event" type="error" required>
     This event is used to sends a real-time interaction transcript to client from the server
@@ -69,8 +69,11 @@ See [Connect](/sdks/javascript/connect) on how to handle these events
         <ResponseField name="content" type="string">
         The content of the transcript.
         </ResponseField>
+        <ResponseField name="complete" type="string">
+        Specifies if the transcript is the full transcript or intermediate transcripts.
+        </ResponseField>
     </Expandable>
-</ParamField> */}
+</ParamField>
 
 ### Error
 
