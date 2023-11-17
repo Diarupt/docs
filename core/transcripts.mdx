@@ -5,13 +5,13 @@ description: "Transcripts provide interactions logs"
 
 Transcripts are a way to provide a detailed log of the interaction between the AI and the user. This is useful for debugging, post processing and for auditing purposes.
 
-To access the intractions transcript history you can fetch a interaction session. 
+To access the interactions transcript history you can fetch an interaction session. 
 
 <Info>
 See the [Get Session API](/api/sessions/get-session) for more information.
 </Info>
 
-An Interaction transcript history would something look like this:
+Below is a snapshot of an Interaction transcript:
 
 ```json
 [
@@ -60,7 +60,7 @@ That should log the transcript to the console as it is being generated, which wo
     "timestamp": "2020-10-20T18:00:00.000Z",
     "role": "assistant",
     "content": "Hello, how can I help you?",
-    "complete": true // indicates that this is the full transcript
+    "complete": true // indicates transcript contains complete statement
 }
 ```
 
